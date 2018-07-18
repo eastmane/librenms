@@ -78,6 +78,7 @@ Alert when:
 - High CPU usage(per core usage, not overall): `macros.device_up = 1 AND processors.processor_usage >= 90`
 - High port usage, where description is not client & ifType is not softwareLoopback: `macros.port_usage_perc >= 80 AND port.port_descr_type != "client" AND ports.ifType != "softwareLoopback"`
 - Alert when mac address is located on your network `ipv4_mac.mac_address = "2c233a756912"`
+- Alert when process isn't running (requires [check_mk agent running](https://docs.librenms.org/#Extensions/Agent-Setup/)): `Inverted processes.command LIKE '%/usr/sbin/mysqld%'`
 
 ### Alert Rules Collection
 You can also select Alert Rule from the Alerts Collection. These Alert Rules are submitted by users in the community :)
