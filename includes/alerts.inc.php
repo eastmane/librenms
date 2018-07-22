@@ -586,7 +586,12 @@ function IssueAlert($alert)
         }
         $sql = $alert['query'];
         $qry = dbFetchRows($sql, array($alert['device_id']));
+
+        if (count($qry) === 0 && strpos($alert['extra'], '"invert":true') != false ) {
+            $qry[] = array('device_id' => $alert['device_id']);
+        }
         $alert['details']['contacts'] = GetContacts($qry);
+ 
     }
 
     $obj = DescribeAlert($alert);
