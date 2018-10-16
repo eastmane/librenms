@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL'),
 
     /*
     |--------------------------------------------------------------------------
@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => ini_get('date.timezone'), // use existing timezone
+    'timezone' => ini_get('date.timezone') ?: 'UTC', // use existing timezone
 
     /*
     |--------------------------------------------------------------------------
@@ -120,7 +120,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'errorlog'), // use error log until we are booted
+    'log' => env('APP_LOG', 'logs/librenms.log'),  // log to the default file, until boot
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
@@ -166,6 +166,8 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Kamaln7\Toastr\ToastrServiceProvider::class,
+        Fideloper\Proxy\TrustedProxyServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -179,9 +181,9 @@ return [
         App\Providers\ViewServiceProvider::class,
 
         /*
-         * Vendor Service Providers...
+         * LibreNMS Service Providers...
          */
-        Kamaln7\Toastr\ToastrServiceProvider::class,
+        App\Providers\SnmptrapProvider::class,
     ],
 
     /*
